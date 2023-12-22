@@ -9,11 +9,13 @@ from ntscraper import Nitter
 scraper = Nitter()
 
 #Se procede a extraer información usando el nombre de usuarios. Sin embargo,
-#es pertinente precisar que es posible identificar mediante otras formas como, por ejemplo, hashtag:
-cuenta = "ppkamigo"
+#es pertinente precisar que es posible identificar mediante otras formas como, por ejemplo, hashtag.
 
 # Ejemplo 1: obtener información de los tweets
 #=====================================================================
+#user: identifica la forma en que se está descargando. En este caso es mediante nombre del usuario.
+#number: identifica el número de tweets que se busca descargar.
+cuenta = "ppkamigo"
 tweets = scraper.get_tweets(cuenta,mode='user',number=100000)
 
 final_tweets = []
@@ -26,11 +28,12 @@ for tweet in tweets['tweets']:
 
 data1 = pd.DataFrame(final_tweets,columns=[
 	'link','text','name','username','date','is_rt','n_comment','n_rt','n_quote','n_like'])
-data1.to_csv('Tweet_' + str(presi) + '.csv',encoding='utf-8-sig',index=False)
+data1.to_csv('Tweet_' + str(cuenta) + '.csv',encoding='utf-8-sig',index=False)
 
 # Ejemplo 2: obtener información del perfil de los usuarios
 #=====================================================================
-profiles = scraper.get_profile_info(presi)
+cuenta = "ppkamigo"
+profiles = scraper.get_profile_info(cuenta)
 
 final_profiles = []
 data2 = [profiles['name'],profiles['username'],profiles['bio'],profiles['joined'],
@@ -40,5 +43,5 @@ final_profiles.append(data2)
 
 data2 = pd.DataFrame(final_profiles,columns=[
 	'name','username','bio','joined','n_tweet','n_following','n_follower','n_like','n_media'])
-data2.to_csv('Perfil_' + str(presi) + '.csv',encoding='utf-8-sig',index=False)
+data2.to_csv('Perfil_' + str(cuenta) + '.csv',encoding='utf-8-sig',index=False)
 
