@@ -30,6 +30,11 @@ data1 = pd.DataFrame(final_tweets,columns=[
 	'link','text','name','username','date','is_rt','n_comment','n_rt','n_quote','n_like'])
 data1.to_csv('Tweet_' + str(cuenta) + '.csv',encoding='utf-8-sig',index=False)
 
+#Teniendo en cuenta que por defecto se obtienen los tweets más recientes, es posible identificar 
+#fechas de interés modificando el código de la siguiente manera:
+tweets = scraper.get_tweets(cuenta,mode='user',number=100000,since='2017-12-12',until='2018-12-12')
+#El formato fecha tiene que ser YYYY-MM-DD. Año-Mes-Día.
+
 # Ejemplo 2: obtener información del perfil de los usuarios
 #=====================================================================
 cuenta = "ppkamigo"
